@@ -2,6 +2,7 @@ services:
   web-app:
     build:
       context: .
+    image: web-app
     container_name: web-app-container
     restart: always
     links:
@@ -34,6 +35,47 @@ services:
     networks:
       - web-app-net
 
+  redis:
+    image: redis:7.4-alpine
+    container_name: redis-container
+    hostname: redis
+    networks:
+      - web-app-net
+    volumes:
+      - service_redis:/data
+
+  worker:
+    image: web-app:latest
+    container_name: worker_container
+    entrypoint: celery
+    command: -A celery_app.app worker --loglevel=info
+    networks:
+      - web-app-net
+    volumes:
+      - ./service:/service
+    links:
+      - redis
+    depends_on:
+      - redis
+      - web-app
+
+  flower:
+    image: web-app:latest
+    container_name: flower_container
+    entrypoint: celery
+    command: -A celery_app.app flower
+    volumes:
+      - ./service:/service
+    networks:
+      - web-app-net
+    links:
+      - redis
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+      - web-app
+
 
 networks:
   web-app-net:
@@ -41,3 +83,4 @@ networks:
 
 volumes:
   service_postgres:
+  service_redis:
