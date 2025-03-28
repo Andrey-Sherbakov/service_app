@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.cache import cache
 from django.db.models import F, Sum
 from django.shortcuts import render
 from rest_framework import viewsets
@@ -17,12 +19,16 @@ class SubscriptionView(viewsets.ModelViewSet):
     serializer_class = SubscriptionSerializer
 
     def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset()).aggregate(total_amount=Sum('price'))
-
+        queryset = self.filter_queryset(self.get_queryset())
         response = super().list(request, *args, **kwargs)
 
-        response_data = {'total_amount': queryset['total_amount'],
-                         'subscriptions': response.data}
+        total_cache = cache.get(settings.TOTAL_CACHE_NAME)
+        if total_cache:
+            total_amount = total_cache
+        else:
+            total_amount = queryset.aggregate(total=Sum('price')).get('total')
+            cache.set(settings.TOTAL_CACHE_NAME, total_amount, 60*60)
+
+        response_data = {'total_amount': total_amount, 'subscriptions': response.data}
         response.data = response_data
         return response
-
