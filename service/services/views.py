@@ -12,6 +12,7 @@ class SubscriptionView(viewsets.ModelViewSet):
         'client__company_name',
         'plan_id',
         'price',
+        'comment',
     )
     serializer_class = SubscriptionSerializer
 

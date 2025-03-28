@@ -47,6 +47,29 @@ services:
   worker:
     image: web-app:latest
     container_name: worker_container
+    hostname: worker
+    entrypoint: celery
+    command: -A celery_app.app worker --loglevel=info
+    networks:
+      - web-app-net
+    volumes:
+      - ./service:/service
+    links:
+      - redis
+    environment:
+      - DB_HOST=database
+      - DB_USER=dbuser
+      - DB_NAME=dbname
+      - DB_PASS=pass
+    depends_on:
+      - redis
+      - web-app
+      - database
+
+  worker2:
+    image: web-app:latest
+    container_name: worker_container2
+    hostname: worker2
     entrypoint: celery
     command: -A celery_app.app worker --loglevel=info
     networks:
