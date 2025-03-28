@@ -55,9 +55,15 @@ services:
       - ./service:/service
     links:
       - redis
+    environment:
+      - DB_HOST=database
+      - DB_USER=dbuser
+      - DB_NAME=dbname
+      - DB_PASS=pass
     depends_on:
       - redis
       - web-app
+      - database
 
   flower:
     image: web-app:latest

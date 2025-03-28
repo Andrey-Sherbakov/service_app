@@ -11,8 +11,8 @@ class SubscriptionView(viewsets.ModelViewSet):
         'client__user__email',
         'client__company_name',
         'plan_id',
-    ).annotate(price=F('service__full_price') -
-                       F('service__full_price') * F('plan__discount_percent') / 100.00)
+        'price',
+    )
     serializer_class = SubscriptionSerializer
 
     def list(self, request, *args, **kwargs):
