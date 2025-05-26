@@ -59,7 +59,7 @@ _Учебное приложение в котором я изучал спос�
     ```
 ![image](https://drive.google.com/uc?id=1et7nmpD5RTj4BpGxs-Cy61BWHLtXAxIh)
 * http://127.0.0.1:5555/ - Flower для отслеживания отложенных Celery задач
-![image](https://drive.google.com/file/d/1WbExFS4SVI6ayyBRtDFMgRfEJHEoF47f/view?usp=sharing)
+![image]((https://drive.google.com/uc?id=1WbExFS4SVI6ayyBRtDFMgRfEJHEoF47f)
 
 ## 🌐 API
 * http://127.0.0.1:8000/api/subscriptions/ - GET для получения всех подписок, POST для создания новой подписки
