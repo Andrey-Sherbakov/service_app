@@ -6,8 +6,8 @@ RUN pip install --upgrade pip
 WORKDIR /service
 EXPOSE 8000
 
-COPY requirments.txt /temp/requirments.txt
-RUN pip install -r /temp/requirments.txt
+COPY requirements.txt /temp/requirements.txt
+RUN pip install -r /temp/requirements.txt
 
 COPY service /service
 
