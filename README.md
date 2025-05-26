@@ -58,7 +58,7 @@ _Учебное приложение в котором я изучал спос�
     База данных - dbname
     ```
     ![image](https://drive.google.com/uc?id=1et7nmpD5RTj4BpGxs-Cy61BWHLtXAxIh)
-* http://127.0.0.1:5555/ - Flower для отслеживания отложенных Celery задач
+* http://127.0.0.1:5555/ - Flower для отслеживания отложенных Celery задач с двумя воркерами
 ![image](https://drive.google.com/uc?id=1WbExFS4SVI6ayyBRtDFMgRfEJHEoF47f)
 
 ## 🌐 API
