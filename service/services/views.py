@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.core.cache import cache
-from django.db.models import F, Sum
-from django.shortcuts import render
+from django.db.models import Sum
 from rest_framework import viewsets
 
 from services.models import Subscription

@@ -35,6 +35,17 @@ services:
     networks:
       - web-app-net
 
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - '8080:8080'
+    depends_on:
+      - database
+    networks:
+      - web-app-net
+
+
   redis:
     image: redis:7.4-alpine
     container_name: redis-container
